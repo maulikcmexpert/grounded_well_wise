@@ -209,6 +209,7 @@ class GroupController extends CoreController
         try {
             DB::beginTransaction();
             $total_session = $request->total_session;
+            $group_type = $request->group_type;
 
             if ($group_type == 'internal') {
 
