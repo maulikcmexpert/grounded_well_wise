@@ -77,6 +77,10 @@ Route::middleware('auth')->group(function () {
         Route::post('group/ajax_doctor_call', [GroupController::class, 'addDoctor'])->middleware(['isAdmin']);
         Route::post('group/ajax_update_doctor_call', [GroupController::class, 'updateAjaxDoctor'])->middleware(['isAdmin']);
         Route::post('group/ajax_session_call', [GroupController::class, 'addSession'])->middleware(['isAdmin']);
+        Route::post('group/external_ajax_session_call', [GroupController::class, 'externalAddSession'])->middleware(['isAdmin']);
+        Route::post('group/update_external_ajax_session_call', [GroupController::class, 'updateExternalSession'])->middleware(['isAdmin']);
+        Route::post('group/group_type_internal_external', [GroupController::class, 'groupTypeInternalExternal'])->middleware(['isAdmin']);
+
         Route::post('group/ajax_update_session', [GroupController::class, 'updateSession'])->middleware(['isAdmin']);
         Route::post('group/is_doctor_available', [GroupController::class, 'checkDoctorIsAvailable'])->middleware(['isAdmin']);
         Route::post('group/remove_assign_doctor', [GroupController::class, 'removeAssignedDoctor'])->middleware(['isAdmin']);

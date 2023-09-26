@@ -888,8 +888,38 @@ table.group-list tr td:nth-child(2){
     margin-left: 20px;
 }
 
+.sessionremove , .externalsessionremove{
+    position: absolute;
+    right: 25px;
+    top: 0%;
+    width: 100%;
+    max-width: 20px;
+    height: 20px;
+    border: 2px solid #79337d !important;
+    border-radius: 50% !important;
+    /* padding-left: 3px !important; */
+    /* padding-top: 0px !important; */
+    font-size: 10px;
+    color: #79337d !important;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sessionremove i, .externalsessionremove i{
+    line-height: inherit;
+}
+.internalhtml .sessionremove{
+    top: 50% !important;
+}
+
+
 .edit-group #doctorAssign .otupdateremove{
     padding: 0px 3px !important;
+}
+select:focus-visible{
+    border:1px solid #774692 !important;
+    outline: none !important;
 }
 
 /* ======== staff-detail ========== */

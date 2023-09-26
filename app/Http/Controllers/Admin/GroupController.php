@@ -132,6 +132,18 @@ class GroupController extends CoreController
     }
 
 
+    public function externalAddSession(Request $request)
+    {
+        $data['total_sessoin'] = $request->totalSession;
+        return view('admin.group.externalajaxsession', $data);
+    }
+
+    public function groupTypeInternalExternal(Request $request)
+    {
+        $data['group_type'] = $request->group_type;
+        $data['doctors'] = User::where('status', '1')->whereIn('role_id', ['3', '4'])->get();
+        return view('admin.group.grouptypeajax', $data);
+    }
 
     public function checkDoctorIsAvailable(Request $request)
     {
@@ -197,58 +209,107 @@ class GroupController extends CoreController
         try {
             DB::beginTransaction();
             $total_session = $request->total_session;
-            $start_session_date = $request->start_session_date;
+            $group_type = $request->group_type;
+            if ($group_type == 'internal') {
 
-            $startDate = strtotime($start_session_date);
-            $daysCount = 0;
+                $start_session_date = $request->start_session_date;
 
-            $sessionDate = [];
+                $startDate = strtotime($start_session_date);
+                $daysCount = 0;
 
-            while ($daysCount < $total_session) {
-                $dayOfWeek = date('N', $startDate); // 1 (Monday) to 7 (Sunday)
-                if ($dayOfWeek != 6 && $dayOfWeek != 7) { // Check if it's not Saturday or Sunday
-                    $sessionDate[] = date('Y-m-d', $startDate);
-                    $daysCount++;
+                $sessionDate = [];
+
+                while ($daysCount < $total_session) {
+                    $dayOfWeek = date('N', $startDate); // 1 (Monday) to 7 (Sunday)
+                    if ($dayOfWeek != 6 && $dayOfWeek != 7) { // Check if it's not Saturday or Sunday
+                        $sessionDate[] = date('Y-m-d', $startDate);
+                        $daysCount++;
+                    }
+                    $startDate = strtotime("+1 day", $startDate);
                 }
-                $startDate = strtotime("+1 day", $startDate);
-            }
 
-            $groups =   Group::create([
-                'group_name' => $request->group_name,
-                'group_details' => $request->group_details,
-                'start_session_date' => $start_session_date,
-                'end_session_date' =>   end($sessionDate),
-                'total_session' => $total_session
-            ]);
+                $groups =   Group::create([
+                    'group_name' => $request->group_name,
+                    'group_details' => $request->group_details,
+                    'start_session_date' => $start_session_date,
+                    'end_session_date' =>   end($sessionDate),
+                    'group_type' => $request->group_type,
+                    'total_session' => $total_session
+                ]);
 
 
-            $group_id =  $groups->id;
+                $group_id =  $groups->id;
 
-            $groups = Group::find($group_id);
+                $groups = Group::find($group_id);
 
-            if (!empty($groups)) {
+                if (!empty($groups)) {
 
-                for ($i = 0; $i < count($request->session_name); $i++) {
-                    Group_session::create([
-                        'group_id' => $group_id,
-                        'session_name' => $request->session_name[$i],
-                        'session_date' => $sessionDate[$i]
-                    ]);
+                    for ($i = 0; $i < count($request->session_name); $i++) {
+                        Group_session::create([
+                            'group_id' => $group_id,
+                            'session_name' => $request->session_name[$i],
+                            'session_date' => $sessionDate[$i]
+                        ]);
+                    }
+                    if (is_array($request->doctor_id) && count($request->doctor_id) != 0 && !is_null($request->doctor_id[0])) {
+
+
+                        for ($d = 0; $d < count($request->doctor_id); $d++) {
+
+                            GroupDoctorAssignment::create([
+                                'doctor_id' => $request->doctor_id[$d],
+                                'group_id' => $group_id,
+                                'start_time' =>  $request->start_time[$d],
+                                'end_time' =>  $request->end_time[$d],
+                            ]);
+                        }
+                    }
                 }
-                if (is_array($request->doctor_id) && count($request->doctor_id) != 0 && !is_null($request->doctor_id[0])) {
+            } else {
+
+                $sessionDates = $request->start_session_date;
+
+                $start_session_date = $request->start_session_date[0];
+                if (count($request->start_session_date) == 1) {
+                    $end_session_date = $request->start_session_date[0];
+                } else {
+
+                    $end_session_date = end($sessionDates);
+                }
 
 
-                    for ($d = 0; $d < count($request->doctor_id); $d++) {
+                $groups =   Group::create([
+                    'group_name' => $request->group_name,
+                    'group_details' => $request->group_details,
+                    'start_session_date' => $start_session_date,
+                    'end_session_date' =>   $end_session_date,
+                    'group_type' => $request->group_type,
+                    'total_session' => $total_session
+                ]);
+
+                $group_id =  $groups->id;
+                $groups = Group::find($group_id);
+                if (!empty($groups)) {
+
+                    foreach ($sessionDates as $key => $value) {
+
+                        Group_session::create([
+                            'group_id' => $group_id,
+                            'session_name' => $request->session_name[$key],
+                            'session_date' => $value
+                        ]);
 
                         GroupDoctorAssignment::create([
-                            'doctor_id' => $request->doctor_id[$d],
+                            'doctor_id' => $request->doctor_id,
                             'group_id' => $group_id,
-                            'start_time' =>  $request->start_time[$d],
-                            'end_time' =>  $request->end_time[$d],
+                            'start_time' =>  $request->start_time[$key],
+                            'end_time' =>  $request->end_time[$key],
                         ]);
                     }
                 }
             }
+
+
 
             DB::commit();
             toastr()->success('Group Add successfully !');
@@ -307,6 +368,21 @@ class GroupController extends CoreController
     }
 
 
+    public function updateExternalSession(Request $request)
+    {
+
+        $group_id = decrypt($request->groupId);
+        $data['group_session'] = Group_session::where('group_id', $group_id)->get();
+        $data['groupTime'] = GroupDoctorAssignment::where('group_id', $group_id)->get();
+        $data['startDatePerGroup'] = Group_session::select(\DB::raw('MIN(session_date) as start_date'))
+            ->where('group_id', $group_id)
+            ->get();
+        $data['totalSession'] = $request->totalSession;
+
+        return view('admin.group.update_external_ajax_session', $data);
+    }
+
+
     /**
      * Update the specified resource in storage.
      */
@@ -318,123 +394,190 @@ class GroupController extends CoreController
             $groupId = decrypt($id);
             $total_session = $request->total_session;
             $totalInsertedSession = Group_session::where('group_id', $groupId)->count();
+            $group_type = $request->group_type;
+            if ($group_type == 'internal') {
 
-            $group = Group::findOrFail($groupId);
-            $PrevDate = $group->start_session_date;
-            $group->group_name = $request->group_name;
-            $group->group_details = $request->group_details;
-            $group->total_session = $total_session;
-            $group->start_session_date = ($request->start_session_date != $group->start_session_date) ? $request->start_session_date : $group->start_session_date;
-            $group->save();
+                $group = Group::findOrFail($groupId);
+                $PrevDate = $group->start_session_date;
 
-            if ($request->start_session_date == $PrevDate) {
+                $group->group_name = $request->group_name;
+                $group->group_details = $request->group_details;
+                $group->total_session = $total_session;
+                $group->start_session_date = ($request->start_session_date != $group->start_session_date) ? $request->start_session_date : $group->start_session_date;
+                $group->save();
 
-                if ($request->start_session_date >= date('Y-m-d')) {
-                    $getDateOfStartNewSession = $group->start_session_date;
-                    $start_session_date = $getDateOfStartNewSession;
+                if ($request->start_session_date == $PrevDate) {
 
-                    $startDate = strtotime($start_session_date);
+                    if ($request->start_session_date >= date('Y-m-d')) {
+                        $getDateOfStartNewSession = $group->start_session_date;
+                        $start_session_date = $getDateOfStartNewSession;
+
+                        $startDate = strtotime($start_session_date);
+                    } else {
+                        $getDateOfStartNewSession = Group_session::where('group_id', $groupId)->orderBy('id', 'desc')->take(1)->get();
+                        $getDateOfStartNewSession = $getDateOfStartNewSession[0]->session_date;
+                        $start_session_date = $getDateOfStartNewSession;
+
+                        $startDate = strtotime($start_session_date);
+                        $startDate =  strtotime("+1 day", $startDate);
+                    }
                 } else {
-                    $getDateOfStartNewSession = Group_session::where('group_id', $groupId)->orderBy('id', 'desc')->take(1)->get();
-                    $getDateOfStartNewSession = $getDateOfStartNewSession[0]->session_date;
-                    $start_session_date = $getDateOfStartNewSession;
+                    $start_session_date = $request->start_session_date;
 
                     $startDate = strtotime($start_session_date);
-                    $startDate =  strtotime("+1 day", $startDate);
                 }
-            } else {
-                $start_session_date = $request->start_session_date;
 
-                $startDate = strtotime($start_session_date);
-            }
-
-            $daysCount = 0;
-            $sessionDate = [];
-            while ($daysCount < $total_session) {
-                $dayOfWeek = date('N', $startDate); // 1 (Monday) to 7 (Sunday)
-                if ($dayOfWeek != 6 && $dayOfWeek != 7) { // Check if it's not Saturday or Sunday
-                    $sessionDate[] = date('Y-m-d', $startDate);
-                    $daysCount++;
+                $daysCount = 0;
+                $sessionDate = [];
+                while ($daysCount < $total_session) {
+                    $dayOfWeek = date('N', $startDate); // 1 (Monday) to 7 (Sunday)
+                    if ($dayOfWeek != 6 && $dayOfWeek != 7) { // Check if it's not Saturday or Sunday
+                        $sessionDate[] = date('Y-m-d', $startDate);
+                        $daysCount++;
+                    }
+                    $startDate = strtotime("+1 day", $startDate);
                 }
-                $startDate = strtotime("+1 day", $startDate);
-            }
 
-            if ($total_session > $totalInsertedSession) {
+                if ($total_session > $totalInsertedSession) {
 
 
-                if ($start_session_date >= date('Y-m-d')) {
-                    $sessioninc = 0;
+                    if ($start_session_date >= date('Y-m-d')) {
+                        $sessioninc = 0;
 
-                    if (!empty($request->session_name)) {
-                        Group_session::where('group_id', $groupId)->delete();
-                        foreach ($request->session_name as $value) {
+                        if (!empty($request->session_name)) {
+                            Group_session::where('group_id', $groupId)->delete();
+                            foreach ($request->session_name as $value) {
+                                Group_session::create([
+                                    'group_id' => $groupId,
+                                    'session_name' => $value,
+                                    'session_date' => $sessionDate[$sessioninc]
+                                ]);
+                                $sessioninc++;
+                            }
+                        }
+                    } else {
+                        foreach ($request->session_id as $key => $value) {
+                            $group_session =  Group_session::where('id', $value)->first();
+                            $group_session->session_name = $request->session_name[$key];
+                            $group_session->save();
+                        }
+                        $newSessionArray = array_slice($request->session_name, $totalInsertedSession);
+                        $j = 0;
+                        foreach ($newSessionArray as $value) {
                             Group_session::create([
                                 'group_id' => $groupId,
                                 'session_name' => $value,
-                                'session_date' => $sessionDate[$sessioninc]
+                                'session_date' => $sessionDate[$j]
                             ]);
-                            $sessioninc++;
+                            $j++;
                         }
                     }
                 } else {
-                    foreach ($request->session_id as $key => $value) {
-                        $group_session =  Group_session::where('id', $value)->first();
-                        $group_session->session_name = $request->session_name[$key];
-                        $group_session->save();
+
+                    if ($start_session_date >= date('Y-m-d')) {
+                        $sessioninc = 0;
+                        if (!empty($request->session_name)) {
+                            Group_session::where('group_id', $groupId)->delete();
+                            foreach ($request->session_name as $value) {
+                                Group_session::create([
+                                    'group_id' => $groupId,
+                                    'session_name' => $value,
+                                    'session_date' => $sessionDate[$sessioninc]
+                                ]);
+                                $sessioninc++;
+                            }
+                        }
+                    } else {
+                        foreach ($request->session_id as $key => $value) {
+                            $group_session =  Group_session::where('id', $value)->first();
+                            $group_session->session_name = $request->session_name[$key];
+                            $group_session->save();
+                        }
                     }
-                    $newSessionArray = array_slice($request->session_name, $totalInsertedSession);
-                    $j = 0;
-                    foreach ($newSessionArray as $value) {
-                        Group_session::create([
+                }
+
+                if (is_array($request->doctor_id) && count($request->doctor_id) != 0 && !is_null($request->doctor_id[0])) {
+
+                    GroupDoctorAssignment::where('group_id', $groupId)->delete();
+
+                    for ($d = 0; $d < count($request->doctor_id); $d++) {
+
+                        GroupDoctorAssignment::create([
+                            'doctor_id' => $request->doctor_id[$d],
                             'group_id' => $groupId,
-                            'session_name' => $value,
-                            'session_date' => $sessionDate[$j]
+                            'start_time' =>  $request->start_time[$d],
+                            'end_time' =>  $request->end_time[$d],
                         ]);
-                        $j++;
                     }
                 }
+
+                $group = Group::findOrFail($groupId);
+                $group->end_session_date = end($sessionDate);
+                $group->save();
             } else {
 
-                if ($start_session_date >= date('Y-m-d')) {
-                    $sessioninc = 0;
-                    if (!empty($request->session_name)) {
-                        Group_session::where('group_id', $groupId)->delete();
-                        foreach ($request->session_name as $value) {
+                $group = Group::findOrFail($groupId);
+                $PrevDate = $group->start_session_date;
+                $requestDate = $request->start_session_date;
+                $lastDate = end($requestDate);
+                $group->group_name = $request->group_name;
+                $group->group_details = $request->group_details;
+                $group->total_session = $total_session;
+                $group->start_session_date = ($request->start_session_date[0] != $group->start_session_date) ? $request->start_session_date[0] : $group->start_session_date;
+                $group->end_session_date = ($lastDate != $group->end_session_date) ? $lastDate : $group->end_session_date;
+                $group->save();
+
+                if ($total_session > $totalInsertedSession) {
+
+                    if ($request->start_session_date[0] >= date('Y-m-d')) {
+                        $sessioninc = 0;
+
+                        if (!empty($request->session_name)) {
+                            Group_session::where('group_id', $groupId)->delete();
+                            foreach ($request->session_name as $value) {
+                                Group_session::create([
+                                    'group_id' => $groupId,
+                                    'session_name' => $value,
+                                    'session_date' => $request->start_session_date[$sessioninc]
+                                ]);
+                                $sessioninc++;
+                            }
+                        }
+                    } else {
+                        foreach ($request->session_id as $key => $value) {
+                            $group_session =  Group_session::where('id', $value)->first();
+                            $group_session->session_name = $request->session_name[$key];
+                            $group_session->save();
+                        }
+                        $newSessionArray = array_slice($request->session_name, $totalInsertedSession);
+                        $newSessionArrays = array_slice($request->start_session_date, $totalInsertedSession);
+
+
+                        $j = 0;
+                        foreach ($newSessionArray as $value) {
                             Group_session::create([
                                 'group_id' => $groupId,
                                 'session_name' => $value,
-                                'session_date' => $sessionDate[$sessioninc]
+                                'session_date' => $newSessionArrays[$j]
                             ]);
-                            $sessioninc++;
+                            $j++;
                         }
                     }
-                } else {
-                    foreach ($request->session_id as $key => $value) {
-                        $group_session =  Group_session::where('id', $value)->first();
-                        $group_session->session_name = $request->session_name[$key];
-                        $group_session->save();
+
+
+                    GroupDoctorAssignment::where('group_id', $groupId)->delete();
+
+                    for ($d = 0; $d < count($request->start_session_date); $d++) {
+
+                        GroupDoctorAssignment::create([
+                            'doctor_id' => $request->doctor_id,
+                            'group_id' => $groupId,
+                            'start_time' =>  $request->start_time[$d],
+                            'end_time' =>  $request->end_time[$d],
+                        ]);
                     }
                 }
             }
-
-            if (is_array($request->doctor_id) && count($request->doctor_id) != 0 && !is_null($request->doctor_id[0])) {
-
-                GroupDoctorAssignment::where('group_id', $groupId)->delete();
-
-                for ($d = 0; $d < count($request->doctor_id); $d++) {
-
-                    GroupDoctorAssignment::create([
-                        'doctor_id' => $request->doctor_id[$d],
-                        'group_id' => $groupId,
-                        'start_time' =>  $request->start_time[$d],
-                        'end_time' =>  $request->end_time[$d],
-                    ]);
-                }
-            }
-
-            $group = Group::findOrFail($groupId);
-            $group->end_session_date = end($sessionDate);
-            $group->save();
             DB::commit();
             toastr()->success('Group updated successfully !');
             return redirect()->route('group.index');

@@ -22,7 +22,7 @@ class GroupPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-
+            'group_type' => ['required'],
             'group_name' => ['required', 'unique:groups,group_name'],
             'group_details' => ['required'],
             'start_session_date' => ['required'],

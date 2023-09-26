@@ -65,7 +65,30 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row">
-                                <div class="col-xl-6 col-lg-6">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+
+                                    <div class="fv-row mb-7 fv-plugins-icon-container">
+                                        <!--begin::Label-->
+                                        <label class="required fw-bold fs-6 mb-2">Group Type</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <select name="group_type" id="group_type">
+                                            <option value="">Select Group Type</option>
+                                            <option value="internal">Internal</option>
+                                            <option value="external">External</option>
+                                        </select>
+                                        <!--end::Input-->
+                                        @if ($errors->has('group_type'))
+                                        <span class="text-danger">{{ $errors->first('group_type') }}</span>
+                                        @endif
+                                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+
                                     <div class="fv-row mb-7 fv-plugins-icon-container">
                                         <!--begin::Label-->
                                         <label class="required fw-bold fs-6 mb-2">Group Name</label>
@@ -81,7 +104,7 @@
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
                                 </div>
-                                <div class="col-xl-6 col-lg-6">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                     <div class="fv-row mb-7 fv-plugins-icon-container">
                                         <!--begin::Label-->
                                         <label class="required fw-bold fs-6 mb-2">Group Details</label>
@@ -95,74 +118,8 @@
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
                                     </div>
                                 </div>
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="fv-row mb-7 fv-plugins-icon-container">
-                                        <!--begin::Label-->
-                                        <label class="required fw-bold fs-6 mb-2">Start Session Date</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input type="text" name="start_session_date" class="form-control form-control-solid mb-3 mb-lg-0 start_session_date" id="start_session_date" placeholder="Start Session Date" value="" autocomplete="off">
-                                        <!--end::Input-->
-                                        @if ($errors->has('start_session_date'))
-                                        <span class="text-danger">{{ $errors->first('start_session_date') }}</span>
-                                        @endif
-                                        <div class="fv-plugins-message-container invalid-feedback"></div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="fv-row mb-7 fv-plugins-icon-container">
-                                        <!--begin::Label-->
-                                        <label class="required fw-bold fs-6 mb-2">Number Of Sessions</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input type="text" name="total_session" class="form-control form-control-solid mb-3 mb-lg-0 total_session" id="total_session" placeholder="Number Of Sessions" value="">
-                                        <!--end::Input-->
-                                        @if ($errors->has('total_session'))
-                                        <span class="text-danger">{{ $errors->first('total_session') }}</span>
-                                        @endif
-                                        <div class="fv-plugins-message-container invalid-feedback"></div>
-                                        <div>
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 mt-5 position-relative">
-                                    <div class="row" id="addSession"></div>
-                                </div>
                             </div>
-
-                            <div class="fv-row mb-7 fv-plugins-icon-container" id="doctorAssign" style="display: none;">
-                                <!--begin::Label-->
-                                <button class=" btn btn-primary" id="addMore">Add Therapist</button>
-                                <div class="row mt-5">
-                                    <!--end::Label-->
-                                    <div class="col-4 d-flex flex-column">
-                                        <label class="required fw-bold fs-6 mb-2">Assign Therapist</label>
-
-                                        <select class="form-control form-select doctor_id" name="doctor_id[]" id="multiple-select-field" data-placeholder="Select Therapist">
-                                            <option value="">Select Therapist</option>
-                                            @foreach($doctors as $value)
-                                            <option value="{{ $value->id}}">{{ $value->first_name.' '.$value->last_name}}</option>
-                                            @endforeach
-                                        </select>
-                                        <span class="availdocerror"></span>
-                                    </div>
-                                    <div class="col-4">
-                                        <label class="required fw-bold fs-6 mb-2">start Time</label>
-                                        <input type="time" name="start_time[]" class="form-control start_time">
-                                        <span class="availdocerror"></span>
-                                    </div>
-                                    <div class="col-4">
-                                        <label class="required fw-bold fs-6 mb-2">End Time</label>
-                                        <input type="time" name="end_time[]" class="form-control end_time">
-                                        <span class="availdocerror"></span>
-                                    </div>
-                                </div>
-
-                                <!--begin::Input-->
-
+                            <div id="groupSelectionType">
 
                             </div>
 
