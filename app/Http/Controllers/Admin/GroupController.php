@@ -388,7 +388,7 @@ class GroupController extends CoreController
      */
     public function update(GroupUpdatePostRequest $request, $id)
     {
-
+        dd($request);
         try {
             DB::beginTransaction();
             $groupId = decrypt($id);
