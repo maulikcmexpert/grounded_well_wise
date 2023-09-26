@@ -103,7 +103,14 @@
                                 </p>
                             </div>
                         </div>
-
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <h4 class="text-bold">Group Type</h4>
+                                <p class="">
+                                    {{ $groupDetail[0]->group_type }}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                     <!--end::Table-->
                 </div>
@@ -211,7 +218,8 @@
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
                     <div class="card-title">
-                        Group Therapist
+
+                        {{$groupDetail[0]->groupDoctorAssignments[0]->doctor->first_name.' '.$groupDetail[0]->groupDoctorAssignments[0]->doctor->last_name}}
                     </div>
                     <!--begin::Card title-->
                     <!--begin::Card toolbar-->
@@ -223,23 +231,36 @@
                 <div class="card-body pt-0">
                     <!--begin::Table-->
                     @if(count($groupDetail[0]->groupDoctorAssignments) != 0)
-                    @foreach($groupDetail[0]->groupDoctorAssignments as $value)
+                    @foreach($groupDetail[0]->groupDoctorAssignments as $key=> $value)
 
                     <?php $cryptId = encrypt($value->doctor_id); ?>
                     <div class="row">
-                        <div class="col-xl-6 col-lg-6 mb-3">
+                        <div class="col-xl-3 col-lg-6 mb-3">
                             <a href="{{route('doctor.show', $cryptId)}}">
                                 <div class="d-flex align-items-center">
 
-                                    <p>{{ $value->doctor->first_name.' '.$value->doctor->last_name}}</p>
+                                    <p>{{ $groupDetail[0]->group_session[$key]->session_date}}</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xl-6 col-lg-6 mb-3">
+                        <div class="col-xl-3 col-lg-6 mb-3">
+                            <a href="{{route('doctor.show', $cryptId)}}">
+                                <div class="d-flex align-items-center">
+
+                                    <p>{{ $groupDetail[0]->group_session[$key]->session_name}}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 mb-3">
                             <div class="d-flex align-items-center">
-                                <h4>Time</h4>
                                 <p>{{ $value->start_time.' To '.$value->end_time}}</p>
                             </div>
+                        </div>
+                        <div class="col-md-3">
+                            @if($groupDetail[0]->group_session[$key]->session_date < date('Y-m-d')) <span class="text-success">Completed</span>
+                                @elseif($groupDetail[0]->group_session[$key]->session_date > date('Y-m-d'))
+                                <span class="text-warning">Upcoming</span>
+                                @endif
                         </div>
                     </div>
 
