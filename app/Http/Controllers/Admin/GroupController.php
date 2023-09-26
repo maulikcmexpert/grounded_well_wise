@@ -564,19 +564,17 @@ class GroupController extends CoreController
                             $j++;
                         }
                     }
+                }
+                GroupDoctorAssignment::where('group_id', $groupId)->delete();
+                dd($request);
+                for ($d = 0; $d < count($request->start_session_date); $d++) {
 
-
-                    GroupDoctorAssignment::where('group_id', $groupId)->delete();
-                    dd($request);
-                    for ($d = 0; $d < count($request->start_session_date); $d++) {
-
-                        GroupDoctorAssignment::create([
-                            'doctor_id' => $request->doctor_id,
-                            'group_id' => $groupId,
-                            'start_time' =>  $request->start_time[$d],
-                            'end_time' =>  $request->end_time[$d],
-                        ]);
-                    }
+                    GroupDoctorAssignment::create([
+                        'doctor_id' => $request->doctor_id,
+                        'group_id' => $groupId,
+                        'start_time' =>  $request->start_time[$d],
+                        'end_time' =>  $request->end_time[$d],
+                    ]);
                 }
             }
             DB::commit();
