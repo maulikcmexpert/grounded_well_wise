@@ -153,7 +153,7 @@
                 <!--end::Card body-->
             </div>
             <!--end::Card-->
-
+            @if($groupDetail[0]->group_type == 'internal' )
             <div class="card docterGroup">
                 <!--begin::Card header-->
                 <div class="card-header border-0 pt-6">
@@ -205,6 +205,59 @@
 
                 <!--end::Card body-->
             </div>
+            @else
+            <div class="card docterGroup">
+                <!--begin::Card header-->
+                <div class="card-header border-0 pt-6">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                        Group Therapist
+                    </div>
+                    <!--begin::Card title-->
+                    <!--begin::Card toolbar-->
+
+                    <!--end::Card toolbar-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <!--begin::Table-->
+                    @if(count($groupDetail[0]->groupDoctorAssignments) != 0)
+                    @foreach($groupDetail[0]->groupDoctorAssignments as $value)
+
+                    <?php $cryptId = encrypt($value->doctor_id); ?>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 mb-3">
+                            <a href="{{route('doctor.show', $cryptId)}}">
+                                <div class="d-flex align-items-center">
+
+                                    <p>{{ $value->doctor->first_name.' '.$value->doctor->last_name}}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <h4>Time</h4>
+                                <p>{{ $value->start_time.' To '.$value->end_time}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    @endforeach
+                    @else
+                    <div>
+                        {{ "No Doctor Assign" }}
+                    </div>
+                    @endif
+
+                    <!--end::Table-->
+                </div>
+
+
+
+                <!--end::Card body-->
+            </div>
+            @endif
 
 
             <div class="card patientGroup">
