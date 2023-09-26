@@ -205,7 +205,7 @@ class GroupController extends CoreController
      */
     public function store(GroupPostRequest $request)
     {
-        dd($request);
+
         try {
             DB::beginTransaction();
             $total_session = $request->total_session;
