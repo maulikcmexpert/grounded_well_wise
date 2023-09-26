@@ -108,7 +108,7 @@
                     <!--end::Table-->
                 </div>
 
-
+                @if($groupDetail[0]->group_type == 'internal' )
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
                     <div class="card-title">
@@ -147,7 +147,7 @@
 
                     <!--end::Table-->
                 </div>
-
+                @endif
 
 
                 <!--end::Card body-->
