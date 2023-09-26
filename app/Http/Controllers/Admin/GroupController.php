@@ -267,8 +267,7 @@ class GroupController extends CoreController
                     }
                 }
             } else {
-                echo "external";
-                exit;
+
                 $sessionDates = $request->start_session_date;
 
                 $start_session_date = $request->start_session_date[0];
