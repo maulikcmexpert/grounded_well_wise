@@ -209,9 +209,7 @@ class GroupController extends CoreController
         try {
             DB::beginTransaction();
             $total_session = $request->total_session;
-            $group_type = $request->group_type;
-            echo $group_type;
-            exit;
+
             if ($group_type == 'internal') {
 
                 $start_session_date = $request->start_session_date;
@@ -268,7 +266,8 @@ class GroupController extends CoreController
                     }
                 }
             } else {
-
+                echo "external";
+                exit;
                 $sessionDates = $request->start_session_date;
 
                 $start_session_date = $request->start_session_date[0];
