@@ -566,7 +566,7 @@ class GroupController extends CoreController
                     }
                 }
                 GroupDoctorAssignment::where('group_id', $groupId)->delete();
-                dd($request);
+
                 for ($d = 0; $d < count($request->start_session_date); $d++) {
 
                     GroupDoctorAssignment::create([
