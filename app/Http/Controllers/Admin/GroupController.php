@@ -65,15 +65,15 @@ class GroupController extends CoreController
                         if ($checkLastDate[0]->session_date >= date('Y-m-d')) {
 
                             if (@$checkTime[0]->endtime < session()->get('currentTime')) {
-                                $actionBtn .=  '<a class="updateGroup" href="' . $edit_url . '"><i class="fas fa-edit" ></i></a>';
+                                $actionBtn .=  '<a class="updateGroup"  title="Edit" href="' . $edit_url . '"><i class="fas fa-edit" ></i></a>';
                             }
                         }
-                        $actionBtn .= '<a class="" href="javascript:;"   data-url="' . $delete_url . '"  id="delete_group" ><i class="fas fa-trash" ></i></a>';
+                        $actionBtn .= '<a class="" href="javascript:;"  title="Delete"   data-url="' . $delete_url . '"  id="delete_group" ><i class="fas fa-trash" ></i></a>';
                     }
-                    $actionBtn .= '<a class="" href="' . $view . '" role="button">
+                    $actionBtn .= '<a class="" href="' . $view . '" role="button"  title="View">
                  <i class="fa fa-eye" ></i>
                  </a>';
-                    $actionBtn .= '<a class="" href="' . $attendance . '"><i class="fa fa-clock-o" aria-hidden="true"></i></a>
+                    $actionBtn .= '<a class=""  title="Attendance" href="' . $attendance . '"><i class="fa fa-clock-o" aria-hidden="true"></i></a>
                 </div>';
                     return $actionBtn;
                 })

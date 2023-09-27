@@ -17,7 +17,8 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="@if($role_id == 2) {{ route('staff.dashboard') }}@elseif($role_id == 3 || $role_id == 4) {{route('doctor.dashboard') }}@else  {{route('admin.dashboard') }} @endif" class="text-muted text-hover-primary">Dashboard</a>
+                        <a href="@if($role_id == 2) {{ route('staff.dashb
+                            oard') }}@elseif($role_id == 3 || $role_id == 4) {{route('doctor.dashboard') }}@else  {{route('admin.dashboard') }} @endif" class="text-muted text-hover-primary">Dashboard</a>
                     </li>
                     <!--end::Item-->
 
@@ -61,7 +62,7 @@
                     <!--begin::Table-->
                     <div class="row">
                         <div class="col-md-12">
-                            <h4 class="text-bold">Profile</h4>
+                            <h4 class="text-bold mb-8">Profile</h4>
                             <?php $image = url('storage/doctor/' . $doctorData->image); ?>
                             <div class="text-center dprofile-img">
                                 <img class="" src="{{$image}}" width="100px">
@@ -80,13 +81,13 @@
                                 <p class="">{{$doctorData->last_name}}</p>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 mb-3">
                             <div class="d-flex">
                                 <h4 class="text-bold">Identity Number</h4>
                                 <p class="">{{$doctorData->identity_number}}</p>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 mb-3">
                             <div class="d-flex">
                                 <h4 class="text-bold">Email</h4>
                                 <p class="">{{$doctorData->email}}</p>

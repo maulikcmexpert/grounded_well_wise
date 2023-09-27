@@ -542,7 +542,8 @@ div.dataTables_wrapper div.dataTables_length select {
 
 /* ===== docter-detail ======= */
 #kt_table_users .symbol-label{
-    width: 40px;
+    width: 100%;
+    max-width: 40px;
     height: 40px;
     border-radius: 50%;
     /* margin: 0 auto 10px; */
@@ -694,9 +695,11 @@ div.dataTables_wrapper div.dataTables_length select {
 
 .docter-detail h4{
     display: flex;
+    align-items: center;
     flex-basis: 30%;
     font-size: 14px;
     font-weight: 500;
+    margin-bottom: 0px;
 }
 
 .docter-detail p{
@@ -766,6 +769,7 @@ table.group-list tr td:nth-child(2){
     flex-basis: 45%;
     font-size: 13px;
     font-weight: 500;
+    margin-bottom: 0px;
 
 }
 
@@ -897,7 +901,8 @@ table.group-list tr td:nth-child(2){
     height: 20px;
     border: 2px solid #79337d !important;
     border-radius: 50% !important;
-    /* padding-left: 3px !important; */
+    padding-left: 0px !important;
+    padding-right: 0px !important;
     /* padding-top: 0px !important; */
     font-size: 10px;
     color: #79337d !important;
@@ -905,6 +910,7 @@ table.group-list tr td:nth-child(2){
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .sessionremove i, .externalsessionremove i{
     line-height: inherit;
@@ -1073,6 +1079,14 @@ select:focus-visible{
     outline: 0 !important;
     height: 25px !important;
 } */
+
+/* ---button-svg---- */
+.btn .svg-icon rect{
+   fill: #fff !important;
+}
+select{
+    cursor: pointer;
+}
 
 @media only screen and (max-width:1300px){
     #kt_table_users_wrapper{

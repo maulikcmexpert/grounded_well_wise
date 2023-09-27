@@ -40,8 +40,8 @@ class RasQuestionController extends Controller
                     $delete_url = route('ras_question.destroy', $cryptId);
                     $actionBtn = ' 
                     <div class="action-icon">
-                    <a class="" href="' . $edit_url . '"><i class="fa fa-edit"></i></a>
-                    <a class="" href="javascript:;"   data-url="' . $delete_url . '"  id="delete_question" ><i class="fas fa-trash"></i></a>
+                    <a class="" href="' . $edit_url . '"  title="Edit"><i class="fa fa-edit"></i></a>
+                    <a class="" href="javascript:;"  title="Delete"   data-url="' . $delete_url . '"  id="delete_question" ><i class="fas fa-trash"></i></a>
                    
                   
                 </div>';

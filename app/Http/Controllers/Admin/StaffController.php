@@ -54,8 +54,8 @@ class StaffController extends Controller
                     $actionBtn = '
                     <div class="action-icon">
                   
-                    <a class="" href="' . $edit_url . '"><i class="fa fa-edit"></i></a>
-                    <a class="" href="javascript:;"   data-url="' . $delete_url . '"  id="delete_staff" ><i class="fas fa-trash"></i></a>
+                    <a class="" href="' . $edit_url . '"  title="Edit"><i class="fa fa-edit"></i></a>
+                    <a class="" href="javascript:;"   title="Delete"  data-url="' . $delete_url . '"  id="delete_staff" ><i class="fas fa-trash"></i></a>
                     <a class="" href="' . $view . '"  title="view"><i class="fas fa-eye" title="View" ></i></a>
                     </div>
               ';

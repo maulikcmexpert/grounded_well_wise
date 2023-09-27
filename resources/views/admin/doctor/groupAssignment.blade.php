@@ -50,7 +50,7 @@
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
                     <div class="card-title">
-                        <h1> {{ 'DR. '.$doctorDetail[0]->first_name.' '.$doctorDetail[0]->last_name}}</h1>
+                        <h1> {{ 'DR. '.$doctorDetail[0]->first_name.' ' .$doctorDetail[0]->last_name}}</h1>
                     </div>
 
                 </div>
@@ -80,7 +80,7 @@
 
                             @foreach($selectedGroup as $value)
 
-                            <div class="col-lg-3 mb-4">
+                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 mb-4">
                                 <div class="group-box">
                                     <div class="checkbox-container">
 
@@ -149,7 +149,7 @@
                             @foreach($groupData as $value)
 
                             @if(!in_array($value->id,$selected_group))
-                            <div class="col-lg-3 mb-4">
+                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 mb-4">
                                 <div class="group-box">
                                     <div class="checkbox-container">
 

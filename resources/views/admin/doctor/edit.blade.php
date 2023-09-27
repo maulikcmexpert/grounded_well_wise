@@ -65,7 +65,7 @@
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
-                                <label class="d-block fw-bold fs-6 mb-5">Avatar</label>
+                                <label class="d-block fw-bold fs-6 mb-8">Avatar</label>
                                 <!--end::Label-->
                                 <!--begin::Image input-->
                                 <div class="image-input image-input-outline" data-kt-image-input="true">

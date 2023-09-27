@@ -61,7 +61,7 @@
                     <!--begin::Table-->
                     <div class="row">
                         <div class="col-md-12">
-                            <h4 class="text-bold">Profile</h4>
+                            <h4 class="text-bold mb-8">Profile</h4>
                             <?php $image = url('storage/staff/' . $staffData->image); ?>
                             <div class="text-center dprofile-img">
                                 <img class="" src="{{$image}}" width="100px">
