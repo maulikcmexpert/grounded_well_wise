@@ -123,12 +123,23 @@
 
 
                     @if(count($doctorData->groupDoctorAssignments) != 0)
+
+                    @php
+                    $checkExist = [];
+                    @endphp
                     @foreach($doctorData->groupDoctorAssignments as $value)
+
+                    @if(!in_array($value->group_id,$checkExist))
                     <div class="row border border-1 ms-2">
                         <div>
                             {{ $value->group->group_name}}
                         </div>
                     </div>
+                    @php
+                    $checkExist[] = $value->group_id;
+
+                    @endphp
+                    @endif
 
                     @endforeach
                     @else
