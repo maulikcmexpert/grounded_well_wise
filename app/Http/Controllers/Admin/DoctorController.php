@@ -123,7 +123,7 @@ class DoctorController extends Controller
             $doctors = User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
-                'identity_number' => $request->identity_number,
+                'identity_number' => str_replace(' ', '', $request->identity_number),
                 'role_id' => 3,
                 'image' => $imageName,
                 'email' => $request->email,
@@ -221,7 +221,7 @@ class DoctorController extends Controller
 
                 $doctor->first_name = $request->first_name;
                 $doctor->last_name = $request->last_name;
-                $doctor->identity_number = $request->identity_number;
+                $doctor->identity_number = str_replace(' ', '', $request->identity_number);
                 $doctor->role_id = 3;
                 $doctor->email = $request->email;
                 if ($doctor->save() == true) {

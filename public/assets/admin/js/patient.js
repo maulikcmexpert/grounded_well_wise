@@ -32,7 +32,7 @@ $(function () {
             passport_SAID: { required: true },
             identity_number: {
                 required: true,
-                minlength: 4,
+
                 remote: {
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
