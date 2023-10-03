@@ -324,7 +324,7 @@
                                             <label class=" fw-bold fs-6 mb-2">Contact Number</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="contact_number" class="form-control form-control-solid mb-4 mb-lg-0 mobile_code" placeholder="Contact Number" value="">
+                                            <input type="text" name="contact_number" class="form-control form-control-solid mb-3 mb-lg-0 mobile_code" placeholder="Contact Number" value="">
                                             <!--end::Input-->
                                             @if ($errors->has('contact_number'))
                                             <span class="text-danger">{{ $errors->first('contact_number') }}</span>
@@ -339,7 +339,7 @@
                                             <label class=" fw-bold fs-6 mb-2">Alternative Contact Number</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="alternative_contact_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Alternative Contact Number" value="">
+                                            <input type="text" name="alternative_contact_number" class="form-control form-control-solid mb-3 mb-lg-0 mobile_code" placeholder="Alternative Contact Number" value="">
                                             <!--end::Input-->
                                             @if ($errors->has('alternative_contact_number'))
                                             <span class="text-danger">{{ $errors->first('alternative_contact_number') }}</span>
