@@ -505,3 +505,9 @@ $(function () {
         // For demonstration purposes, we're just displaying the time here
     });
 });
+
+$(".mobile_code").intlTelInput({
+    initialCountry: "ZA",
+    separateDialCode: true,
+    // utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.4/js/utils.js"
+});

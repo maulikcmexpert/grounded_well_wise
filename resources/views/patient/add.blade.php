@@ -172,7 +172,7 @@
                                             <!--begin::Label-->
                                             <label class=" fw-bold fs-6 mb-2">Language</label>
                                             <!--end::Label-->
-                                            <input type="text" name="language" class="form-control form-control-solid" value="">
+                                            <input type="text" name="language" class="form-control form-control-solid" value="English" readonly>
 
                                             @if ($errors->has('language'))
                                             <span class="text-danger">{{ $errors->first('language') }}</span>
@@ -267,7 +267,19 @@
                                             <label class=" fw-bold fs-6 mb-2">Next Of Kin</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="next_of_kin" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Next Of Kin" value="">
+                                            <select class="form-control form-control-solid mb-3 mb-lg-0" name="next_of_kin" id="next_of_kin">
+                                                <option value="Father">Select Next Of Kin</option>
+                                                <option value="Father">Father</option>
+                                                <option value="Mother">Mother</option>
+                                                <option value="Partner">Partner</option>
+                                                <option value="Spouse">Spouse</option>
+                                                <option value="Sibling">Sibling</option>
+                                                <option value="Son">Son</option>
+                                                <option value="Daughter">Daughter</option>
+                                                <option value="Friend">Friend</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+
                                             <!--end::Input-->
                                             @if ($errors->has('next_of_kin'))
                                             <span class="text-danger">{{ $errors->first('next_of_kin') }}</span>
@@ -312,7 +324,7 @@
                                             <label class=" fw-bold fs-6 mb-2">Contact Number</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="contact_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Contact Number" value="">
+                                            <input type="text" name="contact_number" class="form-control form-control-solid mb-4 mb-lg-0 mobile_code" placeholder="Contact Number" value="">
                                             <!--end::Input-->
                                             @if ($errors->has('contact_number'))
                                             <span class="text-danger">{{ $errors->first('contact_number') }}</span>
