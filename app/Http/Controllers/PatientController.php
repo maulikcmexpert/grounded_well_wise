@@ -312,8 +312,7 @@ class PatientController extends Controller
                 $patient->last_name = $request->last_name;
                 $patient->identity_number =  $request->identity_number;
                 if ($patient->save() == true) {
-                    echo "hi";
-                    exit;
+
                     $patient->patientDetails->passport_SAID = $request->passport_SAID;
                     $patient->patientDetails->date_of_birth = $request->date_of_birth;
                     $patient->patientDetails->referring_provider = $request->referring_provider;
@@ -322,6 +321,8 @@ class PatientController extends Controller
                     $patient->patientDetails->next_of_kin = $request->next_of_kin;
                     $patient->patientDetails->name = $request->name;
                     $patient->patientDetails->surname = $request->surname;
+                    echo $request->country_code;
+                    exit;
                     $patient->patientDetails->country_code = $request->country_code;
                     $patient->patientDetails->contact_number = $request->contact_number;
                     $patient->patientDetails->alternative_contact_number = $request->alternative_contact_number;
