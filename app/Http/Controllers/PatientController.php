@@ -301,7 +301,7 @@ class PatientController extends Controller
      */
     public function update(PatientsPostUpdateRequest $request, string $id)
     {
-        dd($request);
+
         $patientId = decrypt($id);
         try {
             DB::beginTransaction();
@@ -312,9 +312,10 @@ class PatientController extends Controller
                 $patient->last_name = $request->last_name;
                 $patient->identity_number =  $request->identity_number;
                 if ($patient->save() == true) {
+                    echo "hi";
+                    exit;
                     $patient->patientDetails->passport_SAID = $request->passport_SAID;
                     $patient->patientDetails->date_of_birth = $request->date_of_birth;
-                    // $patient->patientDetails->language = $request->language;
                     $patient->patientDetails->referring_provider = $request->referring_provider;
                     $patient->patientDetails->EZMed_number = $request->EZMed_number;
                     $patient->patientDetails->gender = $request->gender;
