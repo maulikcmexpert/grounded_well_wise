@@ -301,7 +301,7 @@ class PatientController extends Controller
      */
     public function update(PatientsPostUpdateRequest $request, string $id)
     {
-        // dd($request);
+        dd($request);
         $patientId = decrypt($id);
         try {
             DB::beginTransaction();
