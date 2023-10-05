@@ -58,10 +58,6 @@ class PatientController extends Controller
 
                     return $row->patientDetails->EZMed_number;
                 })
-                ->addColumn('identity_number', function ($row) {
-
-                    return substr($row->identity_number, 0, 6) . ' ' . substr($row->identity_number, 6, 4) . ' ' . substr($row->identity_number, 10, 3);
-                })
 
 
 
@@ -164,7 +160,7 @@ class PatientController extends Controller
                 })
 
 
-                ->rawColumns(['number', 'action', 'patient_name', 'profile', 'ezmed_number', 'identity_number', 'ras_form', 'apom_form', 'group_assignment'])
+                ->rawColumns(['number', 'action', 'patient_name', 'profile', 'ezmed_number', 'ras_form', 'apom_form', 'group_assignment'])
 
                 ->make(true);
         }

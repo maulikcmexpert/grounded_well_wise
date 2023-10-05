@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('identity_number', 255)->unique()->nullable();
+            $table->string('identity_number', 13)->unique()->nullable();
             $table->string('image')->nullable()->nullable();
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
