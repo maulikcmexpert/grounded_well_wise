@@ -510,8 +510,102 @@ $(function () {
     });
 });
 
-$(".mobile_code").intlTelInput({
+$(
+    "#contact_number,#alternative_contact_number,#home_number,#work_number,#fax_number"
+).intlTelInput({
     initialCountry: "ZA",
     separateDialCode: true,
     // utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.4/js/utils.js"
 });
+
+var instance = $("[name=contact_number]");
+
+$("[name=contact_number]").on("blur", function () {
+    var instance = $("[name=contact_number]");
+
+    var phoneNumber = instance.intlTelInput("getSelectedCountryData").dialCode;
+    $("#country_code").val(phoneNumber);
+});
+
+$("[name=alternative_contact_number]").on("blur", function () {
+    var instance = $("[name=alternative_contact_number]");
+
+    var phoneNumber = instance.intlTelInput("getSelectedCountryData").dialCode;
+    $("#alternative_country_code").val(phoneNumber);
+});
+
+$("[name=home_number]").on("blur", function () {
+    var instance = $("[name=home_number]");
+
+    var phoneNumber = instance.intlTelInput("getSelectedCountryData").dialCode;
+    $("#home_country_code").val(phoneNumber);
+});
+
+$("[name=work_number]").on("blur", function () {
+    var instance = $("[name=work_number]");
+
+    var phoneNumber = instance.intlTelInput("getSelectedCountryData").dialCode;
+    $("#work_country_code").val(phoneNumber);
+});
+
+$("[name=_number]").on("blur", function () {
+    var instance = $("[name=_number]");
+
+    var phoneNumber = instance.intlTelInput("getSelectedCountryData").dialCode;
+    $("#fax_country_code").val(phoneNumber);
+});
+
+function initAutocomplete(id) {
+    var res = id.split("_");
+    geo = res[0];
+    console.log(res);
+    // Create the autocomplete object, restricting the search to geographical
+    // location types.
+    autocomplete = new google.maps.places.Autocomplete(
+        /** @type {!HTMLInputElement} */
+        (document.getElementById(id)),
+        {
+            types: ["geocode"],
+        }
+    );
+
+    // When the user selects an address from the dropdown, populate the address
+    // fields in the form.
+    autocomplete.addListener("place_changed", fillInAddress);
+}
+
+function fillInAddress() {
+    // Get the place details from the autocomplete object.
+    var place = autocomplete.getPlace();
+
+    document.getElementById("address").value = place.formatted_address;
+    // if($('#address').length){
+    // }
+
+    for (var i = 0; i < place.address_components.length; i++) {
+        for (var j = 0; j < place.address_components[i].types.length; j++) {
+            if (place.address_components[i].types[j] == "postal_code") {
+                document.getElementById("postal_code").value =
+                    place.address_components[i].long_name;
+            }
+
+            if (place.address_components[i].types[j] == "country") {
+                console.log(place.address_components[i].long_name);
+                $("#country option").each(function () {
+                    var optionValue = $(this).val();
+
+                    if (optionValue == place.address_components[i].long_name) {
+                        $(this).prop("selected", true);
+                    }
+                });
+            }
+
+            if (place.address_components[i].types[j] == "locality") {
+                document.getElementById("city").value =
+                    place.address_components[i].long_name;
+            }
+        }
+    }
+
+    //alert(autocomplete.getPlace().geometry.location);false;
+}
