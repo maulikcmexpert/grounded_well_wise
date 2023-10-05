@@ -216,8 +216,16 @@ class PatientController extends Controller
                 $contactDetail->gender = $request->gender;
                 $contactDetail->EZMed_number = $request->EZMed_number;
                 $contactDetail->referring_provider =  $request->referring_provider;
+                $contactDetail->country_code = $request->country_code;
                 $contactDetail->contact_number = $request->contact_number;
                 $contactDetail->alternative_contact_number = $request->alternative_contact_number;
+                $contactDetail->alternative_country_code = $request->alternative_country_code;
+                $contactDetail->home_number = $request->home_number;
+                $contactDetail->home_country_code = $request->home_country_code;
+                $contactDetail->work_number = $request->work_number;
+                $contactDetail->work_country_code = $request->work_country_code;
+                $contactDetail->fax_number = $request->fax_number;
+                $contactDetail->fax_country_code = $request->fax_country_code;
                 $contactDetail->physical_address = $request->physical_address;
                 $contactDetail->complex_name = $request->complex_name;
                 $contactDetail->unit_no = $request->unit_no;
@@ -225,6 +233,11 @@ class PatientController extends Controller
                 $contactDetail->city = $request->city;
                 $contactDetail->country = $request->country;
                 $contactDetail->postal_code = $request->postal_code;
+
+                $contactDetail->funder_type  = $request->funder_type;
+                $contactDetail->medical_aid_number = $request->medical_aid_number;
+                $contactDetail->medical_aid_plan = $request->medical_aid_plan;
+                $contactDetail->patient_dependant_code = $request->patient_dependant_code;
 
                 $patient->patientDetails()->save($contactDetail);
 
@@ -308,14 +321,28 @@ class PatientController extends Controller
                     $patient->patientDetails->next_of_kin = $request->next_of_kin;
                     $patient->patientDetails->name = $request->name;
                     $patient->patientDetails->surname = $request->surname;
+                    $patient->patientDetails->country_code = $request->country_code;
                     $patient->patientDetails->contact_number = $request->contact_number;
                     $patient->patientDetails->alternative_contact_number = $request->alternative_contact_number;
+                    $patient->patientDetails->alternative_country_code = $request->alternative_country_code;
+                    $patient->patientDetails->home_number = $request->home_number;
+                    $patient->patientDetails->home_country_code = $request->home_country_code;
+                    $patient->patientDetails->work_number = $request->work_number;
+                    $patient->patientDetails->work_country_code = $request->work_country_code;
+                    $patient->patientDetails->fax_number = $request->fax_number;
+                    $patient->patientDetails->fax_country_code = $request->fax_country_code;
                     $patient->patientDetails->physical_address = $request->physical_address;
                     $patient->patientDetails->complex_name = $request->complex_name;
                     $patient->patientDetails->unit_no = $request->unit_no;
                     $patient->patientDetails->city = $request->city;
                     $patient->patientDetails->country = $request->country;
                     $patient->patientDetails->postal_code = $request->postal_code;
+
+                    $patient->patientDetails->funder_type  = $request->funder_type;
+                    $patient->patientDetails->medical_aid_number = $request->medical_aid_number;
+                    $patient->patientDetails->medical_aid_plan = $request->medical_aid_plan;
+                    $patient->patientDetails->patient_dependant_code = $request->patient_dependant_code;
+
                     $patient->patientDetails->save();
 
 

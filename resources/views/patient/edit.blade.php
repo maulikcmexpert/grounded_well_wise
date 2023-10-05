@@ -150,20 +150,20 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-6 col-g-6">
+                                    <!-- <div class="col-xl-6 col-g-6">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
-                                            <!--begin::Label-->
-                                            <label class=" fw-bold fs-6 mb-2">Language</label>
-                                            <!--end::Label-->
-                                            <input type="text" name="language" class="form-control form-control-solid" value="{{ $patientDetail[0]->patientDetails->language }}">
+                                         
+                                    <label class=" fw-bold fs-6 mb-2">Language</label>
+                              
+                                    <input type="text" name="language" class="form-control form-control-solid" value="{{ $patientDetail[0]->patientDetails->language }}">
 
 
-                                            @if ($errors->has('language'))
-                                            <span class="text-danger">{{ $errors->first('language') }}</span>
-                                            @endif
-                                            <div class="fv-plugins-message-container invalid-feedback"></div>
-                                        </div>
-                                    </div>
+                                    @if ($errors->has('language'))
+                                    <span class="text-danger">{{ $errors->first('language') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                            </div> -->
 
                                     <div class="col-xl-6 col-g-6">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
@@ -334,6 +334,56 @@
                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                         </div>
                                     </div>
+
+                                    <div class="col-xl-6 col-g-6">
+                                        <div class="fv-row fv-plugins-icon-container">
+                                            <!--begin::Label-->
+                                            <label class=" fw-bold fs-6 mb-2">Home Number</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="home_number" class="form-control form-control-solid mb-3 mb-lg-0" id="home_number" placeholder="Alternative Contact Number" value="{{ '+'.$patientDetail[0]->patientDetails->alternative_country_code.$patientDetail[0]->patientDetails->home_number }}">
+                                            <!--end::Input-->
+                                            <input type="hidden" name="home_country_code" id="home_country_code" value="{{ $patientDetail[0]->patientDetails->home_country_code }}">
+                                            @if ($errors->has('home_number'))
+                                            <span class="text-danger">{{ $errors->first('home_number') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xl-6 col-g-6">
+                                        <div class="fv-row fv-plugins-icon-container">
+                                            <!--begin::Label-->
+                                            <label class=" fw-bold fs-6 mb-2">Work Number</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="work_number" class="form-control form-control-solid mb-3 mb-lg-0" id="work_number" placeholder="Alternative Contact Number" value="{{ '+'.$patientDetail[0]->patientDetails->alternative_country_code.$patientDetail[0]->patientDetails->work_number }}">
+                                            <!--end::Input-->
+                                            <input type="hidden" name="work_country_code" id="work_country_code" value="{{ $patientDetail[0]->patientDetails->work_country_code }}">
+                                            @if ($errors->has('work_number'))
+                                            <span class="text-danger">{{ $errors->first('work_number') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xl-6 col-g-6">
+                                        <div class="fv-row fv-plugins-icon-container">
+                                            <!--begin::Label-->
+                                            <label class=" fw-bold fs-6 mb-2">FAX Number</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="fax_number" class="form-control form-control-solid mb-3 mb-lg-0" id="fax_number" placeholder="Alternative Contact Number" value="{{ '+'.$patientDetail[0]->patientDetails->alternative_country_code.$patientDetail[0]->patientDetails->fax_number }}">
+                                            <!--end::Input-->
+                                            <input type="hidden" name="fax_country_code" id="fax_country_code" value="{{ $patientDetail[0]->patientDetails->fax_country_code }}">
+                                            @if ($errors->has('fax_number'))
+                                            <span class="text-danger">{{ $errors->first('fax_number') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -445,9 +495,9 @@
 
                                             <select name="funder_type" class="funder_type " data-live-search="true">
                                                 <option value="" selected disabled>Select Funder Type</option>
-                                                <option value="Medical Scheme">Medical Scheme</option>
-                                                <option value="Insurer">Insurer</option>
-                                                <option value="Private">Private</option>
+                                                <option {{ ($patientDetail[0]->patientDetails->funder_type == "Medical Scheme")?"selected":"" }} value="Medical Scheme">Medical Scheme</option>
+                                                <option {{ ($patientDetail[0]->patientDetails->funder_type == "Insurer")?"selected":"" }} value="Insurer">Insurer</option>
+                                                <option {{ ($patientDetail[0]->patientDetails->funder_type == "Private")?"selected":"" }} value="Private">Private</option>
                                             </select>
                                             <!--end::Input-->
                                             @if ($errors->has('funder_type'))
@@ -463,7 +513,7 @@
                                             <label class=" fw-bold fs-6 mb-2">Medical Aid Number</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="medical_aid_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Medical Aid Number" value="">
+                                            <input type="text" name="medical_aid_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Medical Aid Number" value="{{ $patientDetail[0]->patientDetails->medical_aid_number }}">
                                             <!--end::Input-->
                                             @if ($errors->has('medical_aid_number'))
                                             <span class="text-danger">{{ $errors->first('medical_aid_number') }}</span>
@@ -478,7 +528,7 @@
                                             <label class=" fw-bold fs-6 mb-2">Medical Aid Plan</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="medical_aid_plan" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Medical Aid Plan" value="">
+                                            <input type="text" name="medical_aid_plan" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Medical Aid Plan" value="{{ $patientDetail[0]->patientDetails->medical_aid_plan }}">
                                             <!--end::Input-->
                                             @if ($errors->has('medical_aid_plan'))
                                             <span class="text-danger">{{ $errors->first('medical_aid_plan') }}</span>
@@ -493,7 +543,7 @@
                                             <label class=" fw-bold fs-6 mb-2">Patient dependant Code</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" id="patient_dependant_code" name="patient_dependant_code" class="form-control form-control-solid" placeholder="00" value="">
+                                            <input type="text" id="patient_dependant_code" name="patient_dependant_code" class="form-control form-control-solid" placeholder="00" value="{{ $patientDetail[0]->patientDetails->patient_dependant_code }}">
 
 
                                             <!--end::Input-->
