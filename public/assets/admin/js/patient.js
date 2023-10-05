@@ -584,12 +584,6 @@ function fillInAddress() {
 
     for (var i = 0; i < place.address_components.length; i++) {
         for (var j = 0; j < place.address_components[i].types.length; j++) {
-            if (place.address_components[i].types[j] == "sublocality") {
-                console.log(place.address_components[i].long_name);
-                // document.getElementById("postal_code").value =
-                //     place.address_components[i].long_name;
-            }
-
             if (place.address_components[i].types[j] == "postal_code") {
                 document.getElementById("postal_code").value =
                     place.address_components[i].long_name;
