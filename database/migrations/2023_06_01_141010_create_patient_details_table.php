@@ -24,14 +24,26 @@ return new class extends Migration
             $table->string('next_of_kin')->nullable();
             $table->string('name')->nullable();
             $table->string('surname')->nullable();
+            $table->integer('country_code', 10)->nullable();
             $table->bigInteger('contact_number')->nullable();
+            $table->integer('alternative_country_code', 10)->nullable();
             $table->bigInteger('alternative_contact_number')->nullable();
+            $table->integer('home_country_code', 10)->nullable();
+            $table->string('home_number', 20)->nullable();
+            $table->integer('work_country_code', 10)->nullable();
+            $table->string('work_number', 20)->nullable();
+            $table->integer('fax_country_code', 10)->nullable();
+            $table->string('fax_number', 20)->nullable();
             $table->string('physical_address')->nullable();
             $table->string('complex_name')->nullable();
             $table->integer('unit_no')->nullable();
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->integer('postal_code')->nullable();
+            $table->enum('funder_type', ['Medical Scheme', 'Insurer', 'Private'])->nullable();
+            $table->string('medical_aid_number', 100)->nullable();
+            $table->string('medical_aid_plan', 100)->nullable();
+            $table->string('patient_dependant_code', 100)->nullable();
             $table->timestamps();
         });
     }

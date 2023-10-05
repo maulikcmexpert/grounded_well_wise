@@ -175,6 +175,7 @@ class PatientController extends Controller
     {
         $data['page'] = 'patient.add';
         $data['role_id'] = Auth::guard('web')->user()->role_id;
+        $data['countryList'] = $this->countryList();
         $data['getRefferingDR'] = User::whereIn('role_id', ['4', '3'])->get();
         $data['js'] = ['patient'];
         return view('admin.main_layout', $data);
@@ -273,6 +274,7 @@ class PatientController extends Controller
         $patient_id =  decrypt($id);
         $data['page'] = 'patient.edit';
         $data['role_id'] = Auth::guard('web')->user()->role_id;
+        $data['countryList'] = $this->countryList();
         $data['getRefferingDR'] = User::whereIn('role_id', ['4', '3'])->get();
         $data['js'] = ['patient'];
         $data['patientDetail'] = User::with('patientDetails')->where('id', $patient_id)->get();
