@@ -358,7 +358,7 @@
                                             <label class=" fw-bold fs-6 mb-2">Work Number</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="work_number" class="form-control form-control-solid mb-3 mb-lg-0" id="work_number" placeholder="Work Number" value="{{ (!empty($patientDetail[0]->patientDetails->work_number))?'+'.$patientDetail[0]->patientDetails->work_country_code.$patientDetail[0]->patientDetails->work_number }}">
+                                            <input type="text" name="work_number" class="form-control form-control-solid mb-3 mb-lg-0" id="work_number" placeholder="Work Number" value="{{ (!empty($patientDetail[0]->patientDetails->work_number))?'+'.$patientDetail[0]->patientDetails->work_country_code.$patientDetail[0]->patientDetails->work_number:'' }}">
                                             <!--end::Input-->
                                             <input type="hidden" name="work_country_code" id="work_country_code" value="{{ $patientDetail[0]->patientDetails->work_country_code }}">
                                             @if ($errors->has('work_number'))
@@ -375,7 +375,7 @@
                                             <label class=" fw-bold fs-6 mb-2">FAX Number</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="fax_number" class="form-control form-control-solid mb-3 mb-lg-0" id="fax_number" placeholder="FAX Number" value="{{ (!empty($patientDetail[0]->patientDetails->fax_number))?'+'.$patientDetail[0]->patientDetails->fax_country_code.$patientDetail[0]->patientDetails->fax_number }}">
+                                            <input type="text" name="fax_number" class="form-control form-control-solid mb-3 mb-lg-0" id="fax_number" placeholder="FAX Number" value="{{ (!empty($patientDetail[0]->patientDetails->fax_number))?'+'.$patientDetail[0]->patientDetails->fax_country_code.$patientDetail[0]->patientDetails->fax_number:'' }}">
                                             <!--end::Input-->
                                             <input type="hidden" name="fax_country_code" id="fax_country_code" value="{{ $patientDetail[0]->patientDetails->fax_country_code }}">
                                             @if ($errors->has('fax_number'))
