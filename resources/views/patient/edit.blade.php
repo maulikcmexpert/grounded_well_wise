@@ -586,3 +586,4 @@
     <!--end::Post-->
     </div>
     <!--end::Content-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYCSSv9O2XmFIWrsBRFDvcNLRephrpcmE&libraries=places"></script>
