@@ -583,7 +583,7 @@ function fillInAddress() {
     // }
 
     for (var i = 0; i < place.address_components.length; i++) {
-        dd(place.address_components[i].types);
+        console.log(place.address_components[i].types);
         for (var j = 0; j < place.address_components[i].types.length; j++) {
             if (place.address_components[i].types[j] == "postal_code") {
                 document.getElementById("postal_code").value =
