@@ -451,13 +451,19 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-6 col-g-6">
+                                    <div class="col-xl-6 col-lg-6">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
                                             <!--begin::Label-->
                                             <label class=" fw-bold fs-6 mb-2">Country</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="country" class="form-control form-control-solid" value="{{$patientDetail[0]->patientDetails->country}}">
+                                            <select name="country" id="country">
+                                                <option value="">Select Country</option>
+                                                @foreach($countryList as $val)
+                                                <option value="{{ $val}}">{{$val}}</option>
+                                                @endforeach
+                                            </select>
+
                                             <!--end::Input-->
                                             @if ($errors->has('country'))
                                             <span class="text-danger">{{ $errors->first('country') }}</span>
