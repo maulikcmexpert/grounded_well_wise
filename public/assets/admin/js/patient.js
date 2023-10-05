@@ -32,7 +32,9 @@ $(function () {
             passport_SAID: { required: true },
             identity_number: {
                 required: true,
-
+                number: true,
+                minlength: 13,
+                maxlength: 13,
                 remote: {
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -94,7 +96,9 @@ $(function () {
             passport_SAID: { required: "Please select passport or SA ID" },
             identity_number: {
                 required: "Please enter identity number",
-
+                number: "Identity number must be only digit",
+                minlength: "Please enter 13 digit Identity number",
+                maxlength: "Please enter 13 digit Identity number",
                 remote: "identity_number is already exist",
             },
             password: {

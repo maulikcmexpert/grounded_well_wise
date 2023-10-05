@@ -128,7 +128,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
 
-                                            <input type="identity_number" id="formattedNumber" name="identity_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Identity Number" value="">
+                                            <input type="identity_number" name="identity_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Identity Number" value="">
                                             <!--end::Input-->
                                             @if ($errors->has('identity_number'))
                                             <span class="text-danger">{{ $errors->first('identity_number') }}</span>
@@ -467,45 +467,3 @@
     <!--end::Post-->
 </div>
 <!--end::Content-->
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const formattedNumberInput = document.getElementById("formattedNumber");
-
-        formattedNumberInput.addEventListener("input", function() {
-            let value = this.value.replace(/\D/g, ""); // Remove non-digit characters
-
-            if (value.length > 13) {
-                value = value.slice(0, 13);
-            }
-
-            if (value.length >= 6) {
-                value = value.slice(0, 6) + " " + value.slice(6);
-            }
-
-            if (value.length >= 11) {
-                value = value.slice(0, 11) + " " + value.slice(11);
-            }
-
-            this.value = value;
-        });
-
-        formattedNumberInput.addEventListener("keydown", function(e) {
-            if (e.key === "Backspace") {
-                let value = this.value.replace(/\D/g, ""); // Remove non-digit characters
-
-                if (value.length > 0) {
-                    value = value.slice(0, -1); // Remove the last character
-                }
-
-                if (value.length >= 11) {
-                    value = value.slice(0, 11) + " " + value.slice(11);
-                } else if (value.length >= 6) {
-                    value = value.slice(0, 6) + " " + value.slice(6);
-                }
-
-                this.value = value;
-                e.preventDefault(); // Prevent the default backspace behavior
-            }
-        });
-    });
-</script>

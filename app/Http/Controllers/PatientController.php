@@ -196,7 +196,7 @@ class PatientController extends Controller
             $Patients = User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
-                'identity_number' => str_replace(' ', '', $request->identity_number),
+                'identity_number' => $request->identity_number,
                 'role_id' => '5',
                 'password' => bcrypt($request->password),
                 'status' => '1'
@@ -300,7 +300,7 @@ class PatientController extends Controller
             if (!empty($patient)) {
                 $patient->first_name = $request->first_name;
                 $patient->last_name = $request->last_name;
-                $patient->identity_number = str_replace(' ', '', $request->identity_number);
+                $patient->identity_number =  $request->identity_number;
                 if ($patient->save() == true) {
                     $patient->patientDetails->passport_SAID = $request->passport_SAID;
                     $patient->patientDetails->date_of_birth = $request->date_of_birth;
