@@ -167,19 +167,19 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-6 col-lg-6">
+                                    <!-- <div class="col-xl-6 col-lg-6">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
-                                            <!--begin::Label-->
-                                            <label class=" fw-bold fs-6 mb-2">Language</label>
-                                            <!--end::Label-->
-                                            <input type="text" name="language" class="form-control form-control-solid" value="English" readonly>
+                                       
+                                    <label class=" fw-bold fs-6 mb-2">Language</label>
+                                  
+                                    <input type="text" name="language" class="form-control form-control-solid" value="English" readonly>
 
-                                            @if ($errors->has('language'))
-                                            <span class="text-danger">{{ $errors->first('language') }}</span>
-                                            @endif
-                                            <div class="fv-plugins-message-container invalid-feedback"></div>
-                                        </div>
-                                    </div>
+                                    @if ($errors->has('language'))
+                                    <span class="text-danger">{{ $errors->first('language') }}</span>
+                                    @endif
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                </div>
+                            </div> -->
 
                                     <div class="col-xl-6 col-lg-6">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">

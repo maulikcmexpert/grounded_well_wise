@@ -213,7 +213,6 @@ class PatientController extends Controller
                 $contactDetail->user_id = $Patient_id;
                 $contactDetail->passport_SAID = $request->passport_SAID;
                 $contactDetail->date_of_birth =  $request->date_of_birth;
-
                 $contactDetail->next_of_kin = $request->next_of_kin;
                 $contactDetail->name = $request->name;
                 $contactDetail->surname = $request->surname;
@@ -225,7 +224,7 @@ class PatientController extends Controller
                 $contactDetail->physical_address = $request->physical_address;
                 $contactDetail->complex_name = $request->complex_name;
                 $contactDetail->unit_no = $request->unit_no;
-                $contactDetail->language = $request->language;
+                // $contactDetail->language = $request->language;
                 $contactDetail->city = $request->city;
                 $contactDetail->country = $request->country;
                 $contactDetail->postal_code = $request->postal_code;
@@ -304,7 +303,7 @@ class PatientController extends Controller
                 if ($patient->save() == true) {
                     $patient->patientDetails->passport_SAID = $request->passport_SAID;
                     $patient->patientDetails->date_of_birth = $request->date_of_birth;
-                    $patient->patientDetails->language = $request->language;
+                    // $patient->patientDetails->language = $request->language;
                     $patient->patientDetails->referring_provider = $request->referring_provider;
                     $patient->patientDetails->EZMed_number = $request->EZMed_number;
                     $patient->patientDetails->gender = $request->gender;
