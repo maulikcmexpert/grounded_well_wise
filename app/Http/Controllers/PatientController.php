@@ -321,8 +321,7 @@ class PatientController extends Controller
                     $patient->patientDetails->next_of_kin = $request->next_of_kin;
                     $patient->patientDetails->name = $request->name;
                     $patient->patientDetails->surname = $request->surname;
-                    echo $request->country_code;
-                    exit;
+
                     $patient->patientDetails->country_code = $request->country_code;
                     $patient->patientDetails->contact_number = $request->contact_number;
                     $patient->patientDetails->alternative_contact_number = $request->alternative_contact_number;
