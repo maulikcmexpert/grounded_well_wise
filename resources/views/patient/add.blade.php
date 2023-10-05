@@ -128,7 +128,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
 
-                                            <input type="identity_number" name="identity_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Identity Number" value="">
+                                            <input type="text" id="identity_number" name="identity_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Identity Number" value="">
                                             <!--end::Input-->
                                             @if ($errors->has('identity_number'))
                                             <span class="text-danger">{{ $errors->first('identity_number') }}</span>
@@ -169,17 +169,17 @@
 
                                     <!-- <div class="col-xl-6 col-lg-6">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
-                                       
-                                    <label class=" fw-bold fs-6 mb-2">Language</label>
-                                  
-                                    <input type="text" name="language" class="form-control form-control-solid" value="English" readonly>
+                                            
+                                            <label class=" fw-bold fs-6 mb-2">Language</label>
+                                           
+                                            <input type="text" name="language" class="form-control form-control-solid" value="English" readonly>
 
-                                    @if ($errors->has('language'))
-                                    <span class="text-danger">{{ $errors->first('language') }}</span>
-                                    @endif
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                </div>
-                            </div> -->
+                                            @if ($errors->has('language'))
+                                            <span class="text-danger">{{ $errors->first('language') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                    </div> -->
 
                                     <div class="col-xl-6 col-lg-6">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
@@ -264,6 +264,39 @@
                                     <div class="col-xl-6 col-lg-6">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
                                             <!--begin::Label-->
+                                            <label class=" fw-bold fs-6 mb-2">Preferred Contact Type for Essenital Communication</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <select class="form-control form-control-solid mb-3 mb-lg-0" name="essenital_contact_type" id="essenital_contact_type">
+                                                <option value="0">Both Email & Mobile Number</option>
+                                                <option value="1">Mobile Number</option>
+                                            </select>
+                                            <!--end::Input-->
+                                            @if ($errors->has('essenital_contact_type'))
+                                            <span class="text-danger">{{ $errors->first('essenital_contact_type') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-6">
+                                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                                            <!--begin::Label-->
+                                            <label class=" fw-bold fs-6 mb-2">Email</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="email" class="form-control" name="email" id="email" value="" placeholder="Email">
+                                            <!--end::Input-->
+                                            @if ($errors->has('email'))
+                                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-6">
+                                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                                            <!--begin::Label-->
                                             <label class=" fw-bold fs-6 mb-2">Next Of Kin</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
@@ -324,7 +357,9 @@
                                             <label class=" fw-bold fs-6 mb-2">Contact Number</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="contact_number" class="form-control form-control-solid mb-3 mb-lg-0 mobile_code" placeholder="Contact Number" value="">
+                                            <input type="text" name="contact_number" id="contact_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Contact Number" value="">
+                                            <input type="hidden" name="country_code" id="country_code" value="">
+
                                             <!--end::Input-->
                                             @if ($errors->has('contact_number'))
                                             <span class="text-danger">{{ $errors->first('contact_number') }}</span>
@@ -336,10 +371,62 @@
                                     <div class="col-xl-6 col-lg-6">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
                                             <!--begin::Label-->
+                                            <label class=" fw-bold fs-6 mb-2">Home Number</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="home_number" id="home_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Home Number" value="">
+                                            <input type="hidden" name="home_country_code" id="home_country_code" value="">
+
+                                            <!--end::Input-->
+                                            @if ($errors->has('home_number'))
+                                            <span class="text-danger">{{ $errors->first('home_number') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-6">
+                                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                                            <!--begin::Label-->
+                                            <label class=" fw-bold fs-6 mb-2">Work Number</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="work_number" id="work_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Work Number" value="">
+                                            <input type="hidden" name="work_country_code" id="work_country_code" value="">
+
+                                            <!--end::Input-->
+                                            @if ($errors->has('work_number'))
+                                            <span class="text-danger">{{ $errors->first('work_number') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-6">
+                                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                                            <!--begin::Label-->
+                                            <label class=" fw-bold fs-6 mb-2">FAX Number</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="fax_number" id="fax_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="FAX Number" value="">
+                                            <input type="hidden" name="fax_country_code" id="fax_country_code" value="">
+
+                                            <!--end::Input-->
+                                            @if ($errors->has('fax_number'))
+                                            <span class="text-danger">{{ $errors->first('fax_number') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-6">
+                                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                                            <!--begin::Label-->
                                             <label class=" fw-bold fs-6 mb-2">Alternative Contact Number</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="alternative_contact_number" class="form-control form-control-solid mb-3 mb-lg-0 mobile_code" placeholder="Alternative Contact Number" value="">
+                                            <input type="text" name="alternative_contact_number" id="alternative_contact_number" class="form-control form-control-solid mb-3 mb-lg-0 mobile_code" placeholder="Alternative Contact Number" value="">
+                                            <input type="hidden" name="alternative_country_code" id="alternative_country_code">
                                             <!--end::Input-->
                                             @if ($errors->has('alternative_contact_number'))
                                             <span class="text-danger">{{ $errors->first('alternative_contact_number') }}</span>
@@ -359,7 +446,10 @@
                                             <label class=" fw-bold fs-6 mb-2">Physical Address</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="physical_address" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Physical Address" value="">
+                                            <input type="text" id="address" onfocus="initAutocomplete('address')" name="physical_address" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Physical Address" value="">
+                                            <div id="result">
+                                                <!-- Display geolocation data here -->
+                                            </div>
                                             <!--end::Input-->
                                             @if ($errors->has('physical_address'))
                                             <span class="text-danger">{{ $errors->first('physical_address') }}</span>
@@ -404,7 +494,7 @@
                                             <label class=" fw-bold fs-6 mb-2">City</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="city" class="form-control form-control-solid" value="">
+                                            <input type="text" id="city" name="city" class="form-control form-control-solid" value="">
 
 
                                             <!--end::Input-->
@@ -421,7 +511,13 @@
                                             <label class=" fw-bold fs-6 mb-2">Country</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="country" class="form-control form-control-solid" value="">
+                                            <select name="country" id="country">
+                                                <option value="">Select Country</option>
+                                                @foreach($countryList as $val)
+                                                <option value="{{ $val}}">{{$val}}</option>
+                                                @endforeach
+                                            </select>
+
                                             <!--end::Input-->
                                             @if ($errors->has('country'))
                                             <span class="text-danger">{{ $errors->first('country') }}</span>
@@ -436,7 +532,7 @@
                                             <label class=" fw-bold fs-6 mb-2">Postal Code</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="postal_code" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Postal Code" value="">
+                                            <input type="text" name="postal_code" id="postal_code" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Postal Code" value="">
                                             <!--end::Input-->
                                             @if ($errors->has('postal_code'))
                                             <span class="text-danger">{{ $errors->first('postal_code') }}</span>
@@ -445,6 +541,80 @@
                                         </div>
                                         <!--end::Input group-->
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="patient-wrp mt-5">
+                                <div class="card-title">Funder Details</div>
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6">
+                                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                                            <!--begin::Label-->
+                                            <label class=" fw-bold fs-6 mb-2">Funder Type</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+
+                                            <select name="funder_type" class="funder_type " data-live-search="true">
+                                                <option value="" selected disabled>Select Funder Type</option>
+                                                <option value="Medical Scheme">Medical Scheme</option>
+                                                <option value="Insurer">Insurer</option>
+                                                <option value="Private">Private</option>
+                                            </select>
+                                            <!--end::Input-->
+                                            @if ($errors->has('funder_type'))
+                                            <span class="text-danger">{{ $errors->first('funder_type') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-6">
+                                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                                            <!--begin::Label-->
+                                            <label class=" fw-bold fs-6 mb-2">Medical Aid Number</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="medical_aid_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Medical Aid Number" value="">
+                                            <!--end::Input-->
+                                            @if ($errors->has('medical_aid_number'))
+                                            <span class="text-danger">{{ $errors->first('medical_aid_number') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-6">
+                                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                                            <!--begin::Label-->
+                                            <label class=" fw-bold fs-6 mb-2">Medical Aid Plan</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="medical_aid_plan" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Medical Aid Plan" value="">
+                                            <!--end::Input-->
+                                            @if ($errors->has('medical_aid_plan'))
+                                            <span class="text-danger">{{ $errors->first('medical_aid_plan') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-6">
+                                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                                            <!--begin::Label-->
+                                            <label class=" fw-bold fs-6 mb-2">Patient dependant Code</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" id="patient_dependant_code" name="patient_dependant_code" class="form-control form-control-solid" placeholder="00" value="">
+
+
+                                            <!--end::Input-->
+                                            @if ($errors->has('patient_dependant_code'))
+                                            <span class="text-danger">{{ $errors->first('patient_dependant_code') }}</span>
+                                            @endif
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -467,3 +637,5 @@
     <!--end::Post-->
 </div>
 <!--end::Content-->
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYCSSv9O2XmFIWrsBRFDvcNLRephrpcmE&libraries=places"></script>
