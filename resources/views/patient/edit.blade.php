@@ -309,7 +309,7 @@
                                             <label class=" fw-bold fs-6 mb-2">Contact Number</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="contact_number" id="contact_number" class="form-control form-control-solid mb-3 mb-lg-0 " placeholder="Contact Number" value="{{ '+'.$patientDetail[0]->patientDetails->country_code.$patientDetail[0]->patientDetails->contact_number }}">
+                                            <input type="text" name="contact_number" id="contact_number" class="form-control form-control-solid mb-3 mb-lg-0 " placeholder="Contact Number" value="{{ $patientDetail[0]->patientDetails->country_code.$patientDetail[0]->patientDetails->contact_number }}">
                                             <input type="hidden" name="country_code" id="country_code" value="{{ $patientDetail[0]->patientDetails->country_code }}">
                                             <!--end::Input-->
                                             @if ($errors->has('contact_number'))
