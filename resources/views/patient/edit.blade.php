@@ -390,13 +390,16 @@
                             <div class="patient-wrp mt-5">
                                 <div class="card-title">Address Details</div>
                                 <div class="row">
-                                    <div class="col-xl-6 col-g-6">
+                                    <div class="col-xl-6 col-lg-6">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
                                             <!--begin::Label-->
                                             <label class=" fw-bold fs-6 mb-2">Physical Address</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <textarea name="physical_address" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Physical Address">{{ $patientDetail[0]->patientDetails->physical_address }}</textarea>
+                                            <input type="text" id="address" onfocus="initAutocomplete('address')" name="physical_address" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Physical Address" value="">
+                                            <div id="result">
+                                                <!-- Display geolocation data here -->
+                                            </div>
                                             <!--end::Input-->
                                             @if ($errors->has('physical_address'))
                                             <span class="text-danger">{{ $errors->first('physical_address') }}</span>
@@ -405,13 +408,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-6 col-g-6">
+                                    <div class="col-xl-6 col-lg-6">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
                                             <!--begin::Label-->
                                             <label class=" fw-bold fs-6 mb-2">Complex Name</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="complex_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Complex Name" value="{{ $patientDetail[0]->patientDetails->complex_name }}">
+                                            <input type="text" name="complex_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Complex Name" value="">
                                             <!--end::Input-->
                                             @if ($errors->has('complex_name'))
                                             <span class="text-danger">{{ $errors->first('complex_name') }}</span>
@@ -420,13 +423,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-6 col-g-6">
+                                    <div class="col-xl-6 col-lg-6">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
                                             <!--begin::Label-->
                                             <label class=" fw-bold fs-6 mb-2">Unit No</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="unit_no" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Unit No" value="{{ $patientDetail[0]->patientDetails->unit_no }}">
+                                            <input type="text" name="unit_no" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Unit No" value="">
                                             <!--end::Input-->
                                             @if ($errors->has('unit_no'))
                                             <span class="text-danger">{{ $errors->first('unit_no') }}</span>
@@ -435,13 +438,14 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-6 col-g-6">
+                                    <div class="col-xl-6 col-lg-6">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
                                             <!--begin::Label-->
                                             <label class=" fw-bold fs-6 mb-2">City</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="city" class="form-control form-control-solid" value="{{$patientDetail[0]->patientDetails->city}}">
+                                            <input type="text" id="city" name="city" class="form-control form-control-solid" value="">
+
 
                                             <!--end::Input-->
                                             @if ($errors->has('city'))
@@ -472,13 +476,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-6 col-g-6">
+                                    <div class="col-xl-6 col-lg-6">
                                         <div class="fv-row mb-7 fv-plugins-icon-container">
                                             <!--begin::Label-->
                                             <label class=" fw-bold fs-6 mb-2">Postal Code</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="text" name="postal_code" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Postal Code" value="{{ $patientDetail[0]->patientDetails->postal_code }}">
+                                            <input type="text" name="postal_code" id="postal_code" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Postal Code" value="">
                                             <!--end::Input-->
                                             @if ($errors->has('postal_code'))
                                             <span class="text-danger">{{ $errors->first('postal_code') }}</span>
